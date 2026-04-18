@@ -14,7 +14,7 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   const { slug } = await props.params;
   const tool = getToolBySlug(slug);
-  if (!tool) return { title: 'Tool Not Found' };
+  if (!tool) return {};
 
   const categoryLabel = tool.category.replace(/-/g, ' ');
   const title = `${tool.name} Review (2026): Features, Pricing & Alternatives`;
@@ -33,9 +33,7 @@ export async function generateMetadata(
       `${tool.name} alternatives`,
       `${tool.name} pricing`,
     ],
-    alternates: {
-      canonical,
-    },
+    alternates: { canonical },
     openGraph: {
       title: `${title} | KIRO`,
       description,
@@ -61,6 +59,14 @@ export default async function ToolPage(props: { params: Promise<{ slug: string }
   const relatedTools = getRelatedTools(tool.slug, tool.category);
   const similarTools = getSimilarTools(tool.slug, tool.category);
   const category = categories.find((c) => c.slug === tool.category);
+  const categoryLabel = (category?.name || tool.category).toLowerCase();
+
+  // Built server-side so Google can crawl it in initial HTML (client component can't SEO-render this)
+  const seoIntro = `${tool.name} is one of the best AI tools available for ${categoryLabel} in 2026. \
+Designed for ${tool.difficulty?.toLowerCase() ?? 'all'}-level users, it helps you ${tool.useCases?.slice(0, 2).join(' and ').toLowerCase() || 'streamline your workflow and boost productivity'}. \
+${tool.description} \
+Whether you are a developer, creator, marketer, or student, ${tool.name} offers a powerful set of features including ${tool.features?.slice(0, 3).join(', ') || 'advanced AI capabilities'}. \
+In this guide, we cover everything you need to know: what ${tool.name} does, its core capabilities, real use cases, honest pros and cons, and the best alternatives to consider in ${categoryLabel}.`;
 
   return (
     <ToolDetailClient
@@ -68,6 +74,7 @@ export default async function ToolPage(props: { params: Promise<{ slug: string }
       relatedTools={relatedTools}
       similarTools={similarTools}
       category={category}
+      seoIntro={seoIntro}
     />
   );
 }

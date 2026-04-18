@@ -13,10 +13,11 @@ interface Props {
   tool: Tool;
   relatedTools: Tool[];
   similarTools: Tool[];
+  seoIntro: string;
   category?: { name: string; slug: string; icon: string; color: string };
 }
 
-export default function ToolDetailClient({ tool, relatedTools, similarTools, category }: Props) {
+export default function ToolDetailClient({ tool, relatedTools, similarTools, seoIntro, category }: Props) {
   const { setMascotState } = useMascot();
 
   // Reset mascot when viewing a tool
@@ -137,6 +138,11 @@ export default function ToolDetailClient({ tool, relatedTools, similarTools, cat
               </div>
             </div>
           </motion.div>
+
+          {/* SEO Intro Block — server-rendered content for indexability */}
+          <div className="mb-10 rounded-2xl border border-border bg-sand/40 px-8 py-6">
+            <p className="text-[15px] leading-[1.85] text-muted font-sans">{seoIntro}</p>
+          </div>
 
           {/* Two-Column Content Layout */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
