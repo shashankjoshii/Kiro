@@ -86,17 +86,23 @@ export const tools: Tool[] = rawTools.map((tool: any) => ({
 
 export type Persona = "students" | "developers" | "marketers";
 
-const personaMap: Record<Persona, string[]> = {
-  students: ["education", "productivity", "notes"],
-  developers: ["coding", "api", "automation"],
-  marketers: ["marketing", "seo", "content"],
+/**
+ * Maps each persona to actual category slugs from categories.json.
+ * This ensures results are always found — the old tag-matching approach
+ * failed because tool tags use emoji prefixes and don't match plain strings.
+ */
+const personaCategoryMap: Record<Persona, string[]> = {
+  students: ["research", "productivity", "text-writing"],
+  developers: ["code-dev", "data-analytics", "productivity"],
+  marketers: ["text-writing", "design", "productivity", "video-audio"],
 };
 
 export function getToolsByPersona(persona: Persona): Tool[] {
-  const tags = personaMap[persona] || [];
-  return tools.filter(tool =>
-    tool.tags?.some(tag => tags.includes(tag.toLowerCase()))
-  );
+  const categorySlugs = personaCategoryMap[persona] || [];
+  return tools
+    .filter((tool) => categorySlugs.includes(tool.category))
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 24); // cap at 24 to keep the page digestible
 }
 
 export function getToolBySlug(slug: string): Tool | undefined {
