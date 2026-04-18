@@ -17,26 +17,54 @@ const sourceSerif = Source_Serif_4({
   weight: ["400", "500", "600"],
 });
 
+const BASE_URL = process.env.NEXT_PUBLIC_APP_URL || "https://kiro-two-tau.vercel.app";
+
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "https://kiro-ai.vercel.app"),
-  title: "KIRO — Your AI Tool Discovery Companion",
+  metadataBase: new URL(BASE_URL),
+  title: {
+    default: "Best AI Tools Directory (2026) – 200+ Free & Paid Tools | KIRO",
+    template: "%s | KIRO",
+  },
   description:
-    "Discover, compare, and choose the best AI tools for your needs. KIRO helps you explore smarter and faster.",
-  keywords: ["AI tools", "artificial intelligence", "AI directory"],
+    "Discover 200+ AI tools for developers, designers, and creators. Updated daily with trending and powerful AI tools.",
+  keywords: [
+    "AI tools",
+    "artificial intelligence tools",
+    "AI directory",
+    "best AI tools 2026",
+    "free AI tools",
+    "ChatGPT alternatives",
+  ],
+  authors: [{ name: "KIRO" }],
+  creator: "KIRO",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-snippet": -1,
+      "max-image-preview": "large",
+      "max-video-preview": -1,
+    },
+  },
   icons: {
     icon: "/favicon.ico",
   },
   openGraph: {
-    title: "KIRO — Your AI Tool Discovery Companion",
-    description: "Discover, compare, and choose the best AI tools for your needs. KIRO helps you explore smarter and faster.",
-    images: ["/favicon.ico"],
+    title: "Best AI Tools Directory (2026) – 200+ Free & Paid Tools | KIRO",
+    description:
+      "Discover 200+ AI tools for developers, designers, and creators. Updated daily with trending and powerful AI tools.",
+    url: BASE_URL,
+    siteName: "KIRO",
     type: "website",
+    locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "KIRO — Your AI Tool Discovery Companion",
-    description: "Discover, compare, and choose the best AI tools for your needs. KIRO helps you explore smarter and faster.",
-    images: ["/favicon.ico"],
+    title: "Best AI Tools Directory (2026) – 200+ Free & Paid Tools | KIRO",
+    description:
+      "Discover 200+ AI tools for developers, designers, and creators. Updated daily with trending and powerful AI tools.",
   },
 };
 

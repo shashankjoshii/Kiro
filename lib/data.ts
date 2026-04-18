@@ -9,6 +9,7 @@ export interface Tool {
   shortDescription: string;
   category: string;
   link: string;
+  pricing?: string;
   featured: boolean;
   features: string[];
   icon: string;
@@ -65,6 +66,7 @@ export const tools: Tool[] = rawTools.map((tool: any) => ({
   shortDescription: tool.shortDescription,
   category: tool.category,
   link: tool.link,
+  pricing: tool.pricing || undefined,
   featured: Boolean(tool.featured),
   features: Array.isArray(tool.features) ? tool.features : [],
   icon: tool.icon || "HelpCircle", // Fallback injected at data layer if omitted
@@ -130,7 +132,18 @@ export function getRelatedTools(currentSlug: string, category: string): Tool[] {
     .filter((tool) => tool.category === category && tool.slug !== currentSlug)
     // Optionally we could rank related tools by score instead of just slicing
     .sort((a, b) => b.score - a.score)
-    .slice(0, 3);
+    .slice(0, 6);
+}
+
+/**
+ * Returns tools from DIFFERENT categories as genuine alternatives.
+ * This is used for the "Similar Tools" section to surface cross-category discovery.
+ */
+export function getSimilarTools(currentSlug: string, currentCategory: string): Tool[] {
+  return tools
+    .filter((tool) => tool.category !== currentCategory && tool.slug !== currentSlug)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 6);
 }
 
 export function getTrendingTools(): Tool[] {
