@@ -1,0 +1,8 @@
+[
+  { "name": "Build apps", "icon": "Rocket", "slug": "build-apps", "targetCategory": "code-dev" },
+  { "name": "Create content", "icon": "Pen", "slug": "create-content", "targetCategory": "text-writing" },
+  { "name": "Make money", "icon": "Coins", "slug": "make-money", "targetCategory": "productivity" },
+  { "name": "Design visuals", "icon": "Palette", "slug": "design-visuals", "targetCategory": "image-generation" },
+  { "name": "Learn AI", "icon": "Brain", "slug": "learn-ai", "targetCategory": "research" },
+  { "name": "Analyze data", "icon": "LineChart", "slug": "analyze-data", "targetCategory": "data-analytics" }
+]

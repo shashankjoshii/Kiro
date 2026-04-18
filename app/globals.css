@@ -1,0 +1,74 @@
+@import "tailwindcss";
+
+@theme {
+  /* Anthropic-inspired warm palette */
+  --color-background: #fbf9f6;
+  --color-foreground: #2c2c2b;
+  --color-card: #ffffff;
+  --color-card-hover: #fcfbf9;
+  --color-border: #eae6df;
+  --color-border-subtle: #f3f0ea;
+  --color-muted: #8b8983;
+  --color-muted-light: #c2bdb3;
+
+  /* Warm accent — terracotta */
+  --color-accent: #d47754;
+  --color-accent-dark: #b86242;
+  --color-accent-light: #f2a488;
+  --color-accent-bg: #fdf3ef;
+
+  /* Secondary — warm sand */
+  --color-sand: #f4efe9;
+  --color-sand-dark: #e8ded3;
+
+  /* Mascot specific colors */
+  --color-mascot-orange: #f28b32;
+  --color-mascot-dark: #372822; /* Tips of ears, paws, eyes */
+  --color-mascot-cream: #fdf0dd; /* Muzzle, cheeks, tail tip */
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background: var(--color-background);
+    color: var(--color-foreground);
+    /* Base font is Inter, Headings will be Source Serif */
+    font-family: var(--font-inter), system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6, .font-serif {
+    font-family: var(--font-source-serif), Georgia, serif;
+    font-weight: 400; /* Anthropic uses lighter weights for headings typically */
+  }
+
+  ::selection {
+    background: rgba(212, 119, 84, 0.2);
+    color: var(--color-foreground);
+  }
+
+  /* Minimal scrollbar */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-border);
+    border-radius: 4px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-muted-light);
+  }
+}
+
+@layer utilities {
+  .gradient-text {
+    /* Anthropic doesn't typically mix huge gradients, keeping it subtle or solid */
+    color: var(--color-accent);
+  }
+}
