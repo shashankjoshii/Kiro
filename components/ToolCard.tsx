@@ -2,16 +2,18 @@
 
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { ExternalLink, ArrowRight } from 'lucide-react';
+import { ExternalLink, ArrowRight, Star } from 'lucide-react';
 import type { Tool } from '@/lib/data';
 import DynamicIcon from '@/components/DynamicIcon';
 
 interface ToolCardProps {
   tool: Tool;
   index?: number;
+  /** Show a "Sponsored" badge — monetization hook for future affiliate deals */
+  sponsored?: boolean;
 }
 
-export default function ToolCard({ tool, index = 0 }: ToolCardProps) {
+export default function ToolCard({ tool, index = 0, sponsored = false }: ToolCardProps) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 16 }}
@@ -20,11 +22,18 @@ export default function ToolCard({ tool, index = 0 }: ToolCardProps) {
       className="group h-full"
     >
       <div className="relative flex h-full flex-col rounded-2xl border border-border bg-card/60 backdrop-blur-md p-6 transition-all duration-300 hover:border-accent/30 hover:bg-card hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:-translate-y-1 overflow-hidden">
-        {tool.trendingLabel && (
+
+        {/* Priority badge (Trending OR Sponsored — Sponsored takes precedence) */}
+        {sponsored ? (
+          <div className="absolute right-0 top-0 rounded-bl-xl bg-amber-50 border-b border-l border-amber-200 px-3 py-1 text-[11px] font-bold tracking-wide text-amber-700 shadow-sm z-10">
+            ⭐ Sponsored
+          </div>
+        ) : tool.trendingLabel ? (
           <div className="absolute right-0 top-0 rounded-bl-xl bg-accent-bg/80 border-b border-l border-accent/20 px-3 py-1 text-[11px] font-bold tracking-wide text-accent-dark shadow-sm backdrop-blur-sm z-10">
             {tool.trendingLabel}
           </div>
-        )}
+        ) : null}
+
         {/* Header */}
         <div className="mb-4 flex items-start justify-between">
           <div className="flex items-center gap-3.5">
@@ -40,7 +49,7 @@ export default function ToolCard({ tool, index = 0 }: ToolCardProps) {
               </span>
             </div>
           </div>
-          {tool.featured && (
+          {tool.featured && !sponsored && (
             <span className="rounded-full bg-accent-bg/80 px-2.5 py-1 text-[10px] font-bold uppercase tracking-widest text-accent shadow-sm backdrop-blur-sm">
               Featured
             </span>
@@ -59,7 +68,7 @@ export default function ToolCard({ tool, index = 0 }: ToolCardProps) {
               {tool.difficulty}
             </span>
           )}
-          {tool.tags?.map(tag => (
+          {tool.tags?.slice(0, 2).map(tag => (
             <span key={tag} className="rounded-md bg-accent-bg/50 text-accent-dark px-2 py-1 text-[11px] font-medium border border-accent/10">
               {tag}
             </span>
@@ -78,7 +87,7 @@ export default function ToolCard({ tool, index = 0 }: ToolCardProps) {
           <a
             href={tool.link}
             target="_blank"
-            rel="noopener noreferrer"
+            rel={sponsored ? 'sponsored noopener noreferrer' : 'noopener noreferrer'}
             className="flex h-[42px] w-[42px] items-center justify-center rounded-xl bg-background border border-border text-muted transition-all duration-200 hover:border-accent/30 hover:bg-accent-bg hover:text-accent active:scale-[0.98]"
             aria-label={`Visit ${tool.name}`}
           >

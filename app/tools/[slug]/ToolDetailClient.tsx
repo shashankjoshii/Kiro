@@ -8,6 +8,7 @@ import ToolCard from '@/components/ToolCard';
 import { useEffect } from 'react';
 import { useMascot } from '@/context/MascotContext';
 import DynamicIcon from '@/components/DynamicIcon';
+import Breadcrumbs, { Crumb } from '@/components/Breadcrumbs';
 
 interface Props {
   tool: Tool;
@@ -47,21 +48,20 @@ export default function ToolDetailClient({ tool, relatedTools, similarTools, seo
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
-      <div className="px-4 py-8 sm:px-6 sm:py-16 lg:px-8">
+      <div className="px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
         <div className="mx-auto max-w-5xl">
-          {/* Back button */}
+          {/* Breadcrumbs */}
           <motion.div
             initial={{ opacity: 0, x: -10 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.3 }}
           >
-            <Link
-              href="/"
-              className="mb-8 inline-flex items-center gap-2 text-sm font-semibold text-muted transition-colors hover:text-foreground"
-            >
-              <ArrowLeft className="h-4 w-4" />
-              Back to Directory
-            </Link>
+            <Breadcrumbs crumbs={[
+              { label: 'Home', href: '/' },
+              { label: 'Categories', href: '/categories' },
+              ...(category ? [{ label: category.name, href: `/categories/${category.slug}` }] : []),
+              { label: tool.name },
+            ]} />
           </motion.div>
 
           {/* Hero Banner Area */}
@@ -368,6 +368,44 @@ export default function ToolDetailClient({ tool, relatedTools, similarTools, seo
               </div>
             </motion.section>
           )}
+
+          {/* SEO FAQ Section */}
+          <motion.section
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="pt-12 mt-12 border-t border-border"
+          >
+            <div className="mb-8">
+              <h2 className="text-3xl font-bold font-serif text-foreground">Frequently Asked Questions</h2>
+            </div>
+            <div className="space-y-4">
+              <div className="rounded-xl border border-border bg-card p-6">
+                <h3 className="text-[17px] font-bold text-foreground mb-2">What is {tool.name} used for?</h3>
+                <p className="text-muted leading-relaxed">
+                  {tool.name} is an AI tool primarily used for {category?.name.toLowerCase() || 'various tasks'}. It allows users to {tool.useCases?.slice(0, 2).join(' and ') || 'improve their workflows'} efficiently using artificial intelligence.
+                </p>
+              </div>
+              <div className="rounded-xl border border-border bg-card p-6">
+                <h3 className="text-[17px] font-bold text-foreground mb-2">Is {tool.name} free?</h3>
+                <p className="text-muted leading-relaxed">
+                  {tool.pricing && tool.pricing.toLowerCase().includes('free') 
+                    ? `Yes, ${tool.name} offers a free tier or trial. The current pricing structure is: ${tool.pricing}.` 
+                    : `${tool.name} is a paid tool. The starting price or pricing model is: ${tool.pricing || 'Check the official website for details'}.`}
+                </p>
+              </div>
+              {relatedTools.length > 0 && (
+                <div className="rounded-xl border border-border bg-card p-6">
+                  <h3 className="text-[17px] font-bold text-foreground mb-2">What are the best alternatives to {tool.name}?</h3>
+                  <p className="text-muted leading-relaxed">
+                    Some of the top alternatives to {tool.name} in the {category?.name || 'same'} category include {relatedTools.slice(0, 3).map(rt => rt.name).join(', ')}. Each offers similar core capabilities but may differ in pricing or specific features.
+                  </p>
+                </div>
+              )}
+            </div>
+          </motion.section>
+
         </div>
       </div>
     </>

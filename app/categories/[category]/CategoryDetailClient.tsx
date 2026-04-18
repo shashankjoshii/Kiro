@@ -2,8 +2,9 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { ArrowLeft } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import ToolCard from '@/components/ToolCard';
+import Breadcrumbs from '@/components/Breadcrumbs';
 import type { Tool } from '@/lib/data';
 
 interface Props {
@@ -15,19 +16,17 @@ export default function CategoryDetailClient({ category, tools }: Props) {
   return (
     <div className="px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
       <div className="mx-auto max-w-7xl">
-        {/* Back */}
+        {/* Breadcrumbs */}
         <motion.div
           initial={{ opacity: 0, x: -10 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.3 }}
         >
-          <Link
-            href="/categories"
-            className="mb-8 inline-flex items-center gap-2 text-sm text-muted transition-colors hover:text-foreground"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            All Categories
-          </Link>
+          <Breadcrumbs crumbs={[
+            { label: 'Home', href: '/' },
+            { label: 'Categories', href: '/categories' },
+            { label: category.name },
+          ]} />
         </motion.div>
 
         {/* Header */}
@@ -72,6 +71,37 @@ export default function CategoryDetailClient({ category, tools }: Props) {
             </Link>
           </div>
         )}
+
+        {/* Internal SEO Links */}
+        <motion.div
+           initial={{ opacity: 0, y: 20 }}
+           whileInView={{ opacity: 1, y: 0 }}
+           viewport={{ once: true }}
+           transition={{ duration: 0.5 }}
+           className="mt-16 pt-12 border-t border-border grid sm:grid-cols-3 gap-6"
+        >
+          <div className="rounded-2xl border border-border bg-card p-6 transition-all hover:border-accent/30 hover:shadow-sm">
+            <h3 className="font-bold font-serif text-lg mb-2 text-foreground">Top Rated Tools</h3>
+            <p className="text-sm text-muted mb-4">Discover the highest scoring AI tools across all categories in 2026.</p>
+            <Link href="/best-ai-tools" className="text-sm font-semibold text-accent inline-flex items-center gap-1 hover:underline">
+              View Best Tools <ArrowRight className="h-3 w-3" />
+            </Link>
+          </div>
+          <div className="rounded-2xl border border-border bg-card p-6 transition-all hover:border-accent/30 hover:shadow-sm">
+            <h3 className="font-bold font-serif text-lg mb-2 text-foreground">Free AI Tools</h3>
+            <p className="text-sm text-muted mb-4">Find powerful AI tools with generous free tiers, no credit card required.</p>
+            <Link href="/free-ai-tools" className="text-sm font-semibold text-accent inline-flex items-center gap-1 hover:underline">
+              View Free Tools <ArrowRight className="h-3 w-3" />
+            </Link>
+          </div>
+          <div className="rounded-2xl border border-border bg-card p-6 transition-all hover:border-accent/30 hover:shadow-sm">
+            <h3 className="font-bold font-serif text-lg mb-2 text-foreground">Use Cases</h3>
+            <p className="text-sm text-muted mb-4">Explore AI tools organized by intent — like making money or learning AI.</p>
+            <Link href="/intents/make-money" className="text-sm font-semibold text-accent inline-flex items-center gap-1 hover:underline">
+              Explore Use Cases <ArrowRight className="h-3 w-3" />
+            </Link>
+          </div>
+        </motion.div>
       </div>
     </div>
   );
