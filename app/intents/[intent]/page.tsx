@@ -128,7 +128,7 @@ export default async function IntentPage(props: { params: Promise<{ intent: stri
           {category && (
             <p className="text-muted text-sm mb-8">
               {tools.length} tools in the{' '}
-              <Link href={`/categories/${category.slug}`} className="text-accent font-semibold hover:underline">
+              <Link href={`/category/${category.slug}`} className="text-accent font-semibold hover:underline">
                 {category.name}
               </Link>{' '}
               category · sorted by KIRO score

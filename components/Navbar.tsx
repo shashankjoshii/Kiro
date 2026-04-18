@@ -41,7 +41,7 @@ export default function Navbar() {
 
   const links = [
     { href: '/', label: 'Home' },
-    { href: '/categories', label: 'Categories' },
+    { href: '/category', label: 'Categories' },
   ];
 
   return (

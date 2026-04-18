@@ -58,8 +58,8 @@ export default function ToolDetailClient({ tool, relatedTools, similarTools, seo
           >
             <Breadcrumbs crumbs={[
               { label: 'Home', href: '/' },
-              { label: 'Categories', href: '/categories' },
-              ...(category ? [{ label: category.name, href: `/categories/${category.slug}` }] : []),
+              { label: 'Categories', href: '/category' },
+              ...(category ? [{ label: category.name, href: `/category/${category.slug}` }] : []),
               { label: tool.name },
             ]} />
           </motion.div>
@@ -94,7 +94,7 @@ export default function ToolDetailClient({ tool, relatedTools, similarTools, seo
                   <div className="flex flex-wrap items-center gap-2 mb-4">
                     {category && (
                       <Link
-                        href={`/categories/${category.slug}`}
+                        href={`/category/${category.slug}`}
                         className="inline-flex items-center gap-1.5 text-sm font-medium text-muted transition-colors hover:text-foreground bg-sand px-3 py-1 rounded-full"
                       >
                         <DynamicIcon name={category.icon} className="h-4 w-4" />
@@ -359,7 +359,7 @@ export default function ToolDetailClient({ tool, relatedTools, similarTools, seo
 
               <div className="mt-8 text-center">
                 <Link
-                  href="/categories"
+                  href="/category"
                   className="inline-flex items-center gap-2 rounded-xl bg-sand px-6 py-3 text-sm font-semibold text-foreground transition-all hover:bg-sand-dark hover:shadow-sm"
                 >
                   Explore All Categories

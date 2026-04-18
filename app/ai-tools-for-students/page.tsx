@@ -66,7 +66,7 @@ export default function AIToolsForStudentsPage() {
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {researchTools.map((tool, i) => <ToolCard key={tool.slug} tool={tool} index={i} />)}
           </div>
-          <Link href="/categories/research" className="mt-4 inline-flex items-center gap-1.5 text-sm text-accent font-semibold hover:underline">
+          <Link href="/category/research" className="mt-4 inline-flex items-center gap-1.5 text-sm text-accent font-semibold hover:underline">
             View all research tools <ArrowRight className="h-3.5 w-3.5" />
           </Link>
         </section>
@@ -80,7 +80,7 @@ export default function AIToolsForStudentsPage() {
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {writingTools.map((tool, i) => <ToolCard key={tool.slug} tool={tool} index={i} />)}
           </div>
-          <Link href="/categories/text-writing" className="mt-4 inline-flex items-center gap-1.5 text-sm text-accent font-semibold hover:underline">
+          <Link href="/category/text-writing" className="mt-4 inline-flex items-center gap-1.5 text-sm text-accent font-semibold hover:underline">
             View all writing tools <ArrowRight className="h-3.5 w-3.5" />
           </Link>
         </section>
@@ -94,7 +94,7 @@ export default function AIToolsForStudentsPage() {
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
             {productivityTools.map((tool, i) => <ToolCard key={tool.slug} tool={tool} index={i} />)}
           </div>
-          <Link href="/categories/productivity" className="mt-4 inline-flex items-center gap-1.5 text-sm text-accent font-semibold hover:underline">
+          <Link href="/category/productivity" className="mt-4 inline-flex items-center gap-1.5 text-sm text-accent font-semibold hover:underline">
             View all productivity tools <ArrowRight className="h-3.5 w-3.5" />
           </Link>
         </section>

@@ -67,7 +67,7 @@ export default function FreeAIToolsPage() {
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {writingTools.map((tool, i) => <ToolCard key={tool.slug} tool={tool} index={i} />)}
           </div>
-          <Link href="/categories/text-writing" className="mt-4 inline-flex items-center gap-1.5 text-sm text-accent font-semibold hover:underline">
+          <Link href="/category/text-writing" className="mt-4 inline-flex items-center gap-1.5 text-sm text-accent font-semibold hover:underline">
             View all writing tools <ArrowRight className="h-3.5 w-3.5" />
           </Link>
         </section>
@@ -81,7 +81,7 @@ export default function FreeAIToolsPage() {
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {codeTools.map((tool, i) => <ToolCard key={tool.slug} tool={tool} index={i} />)}
           </div>
-          <Link href="/categories/code-dev" className="mt-4 inline-flex items-center gap-1.5 text-sm text-accent font-semibold hover:underline">
+          <Link href="/category/code-dev" className="mt-4 inline-flex items-center gap-1.5 text-sm text-accent font-semibold hover:underline">
             View all coding tools <ArrowRight className="h-3.5 w-3.5" />
           </Link>
         </section>
@@ -95,7 +95,7 @@ export default function FreeAIToolsPage() {
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {imageTools.map((tool, i) => <ToolCard key={tool.slug} tool={tool} index={i} />)}
           </div>
-          <Link href="/categories/image-generation" className="mt-4 inline-flex items-center gap-1.5 text-sm text-accent font-semibold hover:underline">
+          <Link href="/category/image-generation" className="mt-4 inline-flex items-center gap-1.5 text-sm text-accent font-semibold hover:underline">
             View all image tools <ArrowRight className="h-3.5 w-3.5" />
           </Link>
         </section>
@@ -109,7 +109,7 @@ export default function FreeAIToolsPage() {
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {researchTools.map((tool, i) => <ToolCard key={tool.slug} tool={tool} index={i} />)}
           </div>
-          <Link href="/categories/research" className="mt-4 inline-flex items-center gap-1.5 text-sm text-accent font-semibold hover:underline">
+          <Link href="/category/research" className="mt-4 inline-flex items-center gap-1.5 text-sm text-accent font-semibold hover:underline">
             View all research tools <ArrowRight className="h-3.5 w-3.5" />
           </Link>
         </section>

@@ -30,7 +30,7 @@ export default function IntentCard({
       transition={{ duration: 0.4, delay: index * 0.05, ease: [0.21, 0.47, 0.32, 0.98] }}
     >
       <Link 
-        href={`/categories/${targetCategory}`} 
+        href={`/category/${targetCategory}`} 
         className="group block h-full"
         onMouseEnter={() => setMascotState('excited')}
         onMouseLeave={() => setMascotState('idle')}

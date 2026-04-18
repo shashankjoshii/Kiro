@@ -24,7 +24,7 @@ export default function CategoryDetailClient({ category, tools }: Props) {
         >
           <Breadcrumbs crumbs={[
             { label: 'Home', href: '/' },
-            { label: 'Categories', href: '/categories' },
+            { label: 'Categories', href: '/category' },
             { label: category.name },
           ]} />
         </motion.div>

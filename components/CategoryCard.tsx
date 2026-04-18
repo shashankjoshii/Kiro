@@ -27,7 +27,7 @@ export default function CategoryCard({
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, delay: index * 0.05, ease: [0.21, 0.47, 0.32, 0.98] }}
     >
-      <Link href={`/categories/${slug}`} className="group block">
+      <Link href={`/category/${slug}`} className="group block">
         <motion.div
           whileHover={{ y: -2 }}
           transition={{ type: 'spring', stiffness: 400, damping: 25 }}

@@ -100,7 +100,7 @@ export default function ChatGPTAlternativesPage() {
 
         <div className="text-center">
           <Link
-            href="/categories/text-writing"
+            href="/category/text-writing"
             className="inline-flex items-center gap-2 rounded-xl bg-accent px-8 py-4 text-[15px] font-bold text-white shadow-lg shadow-accent/20 transition-all hover:shadow-xl hover:-translate-y-1"
           >
             View All AI Writing Tools <ArrowRight className="h-4 w-4" />

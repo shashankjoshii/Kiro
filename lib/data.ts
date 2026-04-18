@@ -173,3 +173,46 @@ export function getTrendingTools(): Tool[] {
     return { ...tool, trendingLabel: label ? label : undefined };
   });
 }
+
+export interface Comparison {
+  slug: string;
+  tool1: Tool;
+  tool2: Tool;
+}
+
+/**
+ * Automatically generates `tool1-vs-tool2` comparison pairs.
+ * To optimize build times and SEO focus, we only generate combinations 
+ * for the TOP 6 tools within the SAME category.
+ */
+export function getComparisons(): Comparison[] {
+  const comparisons: Comparison[] = [];
+  
+  categories.forEach(cat => {
+    // Get top 6 tools for this category based on score
+    const topTools = tools
+      .filter(t => t.category === cat.slug)
+      .sort((a, b) => b.score - a.score)
+      .slice(0, 6);
+      
+    // Generate unique pairs
+    for (let i = 0; i < topTools.length; i++) {
+      for (let j = i + 1; j < topTools.length; j++) {
+        // Alphabetical order for deterministic URLs
+        const sortedPair = [topTools[i], topTools[j]].sort((a, b) => a.slug.localeCompare(b.slug));
+        
+        comparisons.push({
+          slug: `${sortedPair[0].slug}-vs-${sortedPair[1].slug}`,
+          tool1: sortedPair[0],
+          tool2: sortedPair[1]
+        });
+      }
+    }
+  });
+  
+  return comparisons;
+}
+
+export function getComparisonBySlug(slug: string): Comparison | undefined {
+  return getComparisons().find(c => c.slug === slug);
+}

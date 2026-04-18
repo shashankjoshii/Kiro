@@ -77,7 +77,7 @@ export default function BestAIToolsPage() {
               return (
                 <Link
                   key={cat.slug}
-                  href={`/categories/${cat.slug}`}
+                  href={`/category/${cat.slug}`}
                   className="group rounded-2xl border border-border bg-card p-6 transition-all hover:border-accent/30 hover:shadow-md hover:-translate-y-0.5"
                 >
                   <h3 className="font-bold text-foreground group-hover:text-accent-dark transition-colors mb-1">
@@ -92,7 +92,7 @@ export default function BestAIToolsPage() {
 
         <div className="text-center">
           <Link
-            href="/categories"
+            href="/category"
             className="inline-flex items-center gap-2 rounded-xl bg-accent px-8 py-4 text-[15px] font-bold text-white shadow-lg shadow-accent/20 transition-all hover:shadow-xl hover:-translate-y-1"
           >
             Explore All 200+ Tools <ArrowRight className="h-4 w-4" />

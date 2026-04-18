@@ -82,7 +82,7 @@ export default function SearchBar() {
         router.push(`/tools/${results[selectedIndex].slug}`);
         setIsFocused(false);
       } else if (intents[selectedIndex]) {
-        router.push(`/categories/${intents[selectedIndex].targetCategory}`);
+        router.push(`/category/${intents[selectedIndex].targetCategory}`);
         setIsFocused(false);
       }
     } else if (e.key === 'Escape') {
@@ -156,7 +156,7 @@ export default function SearchBar() {
                  {intents.map((intent, idx) => (
                     <Link
                       key={intent.slug}
-                      href={`/categories/${intent.targetCategory}`}
+                      href={`/category/${intent.targetCategory}`}
                       onClick={() => { setIsFocused(false); }}
                       className={`flex items-center gap-3 px-4 py-2.5 transition-colors ${idx === selectedIndex ? 'bg-accent/10' : 'hover:bg-sand'}`}
                     >

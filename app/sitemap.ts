@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next';
-import { tools, categories, Persona } from '@/lib/data';
+import { tools, categories, intents, getComparisons, Persona } from '@/lib/data';
+import { blogPosts } from '@/lib/blog';
 
 const BASE_URL = process.env.NEXT_PUBLIC_APP_URL || 'https://kiro-two-tau.vercel.app';
 
@@ -13,7 +14,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1,
     },
     {
-      url: `${BASE_URL}/categories`,
+      url: `${BASE_URL}/category`,
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 0.9,
@@ -55,7 +56,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   // Category pages
   const categoryRoutes: MetadataRoute.Sitemap = categories.map((cat) => ({
-    url: `${BASE_URL}/categories/${cat.slug}`,
+    url: `${BASE_URL}/category/${cat.slug}`,
     lastModified: new Date(),
     changeFrequency: 'weekly',
     priority: 0.8,
@@ -70,5 +71,45 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.9,
   }));
 
-  return [...staticRoutes, ...toolRoutes, ...categoryRoutes, ...personaRoutes];
+  // Blog pages
+  const blogRoutes: MetadataRoute.Sitemap = [
+    {
+      url: `${BASE_URL}/blog`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.9,
+    },
+    ...blogPosts.map((post) => ({
+      url: `${BASE_URL}/blog/${post.slug}`,
+      lastModified: new Date(post.date),
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    }))
+  ] as MetadataRoute.Sitemap;
+
+  // Comparison pages (Category scoped showdowns)
+  const compareRoutes: MetadataRoute.Sitemap = getComparisons().map((comp) => ({
+    url: `${BASE_URL}/compare/${comp.slug}`,
+    lastModified: new Date(),
+    changeFrequency: 'monthly',
+    priority: 0.7,
+  }));
+
+  // Intent / use-case pages
+  const intentRoutes: MetadataRoute.Sitemap = intents.map((intent) => ({
+    url: `${BASE_URL}/intents/${intent.slug}`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly',
+    priority: 0.85,
+  }));
+
+  return [
+    ...staticRoutes, 
+    ...toolRoutes, 
+    ...categoryRoutes, 
+    ...personaRoutes,
+    ...blogRoutes,
+    ...compareRoutes,
+    ...intentRoutes,
+  ];
 }

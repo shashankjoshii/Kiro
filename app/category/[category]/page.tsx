@@ -19,7 +19,7 @@ export async function generateMetadata(
   const toolCount = getToolsByCategory(cat.slug).length;
   const title = `Best ${cat.name} AI Tools (2026) – ${toolCount}+ Curated Tools`;
   const description = `Explore the best ${cat.name.toLowerCase()} AI tools of 2026. KIRO has curated ${toolCount}+ top-rated tools with honest reviews, features, pricing, and alternatives.`;
-  const canonical = `${BASE_URL}/categories/${cat.slug}`;
+  const canonical = `${BASE_URL}/category/${cat.slug}`;
 
   return {
     title,

@@ -224,7 +224,7 @@ export default function HomePage() {
           <div className="mb-12 flex items-center justify-between">
             <h2 className="text-3xl font-bold tracking-tight sm:text-4xl font-serif">Mascot&apos;s Top Picks</h2>
             <Link
-              href="/categories"
+              href="/category"
               className="hidden items-center gap-1.5 rounded-xl bg-sand/50 px-4 py-2.5 text-sm font-semibold text-muted transition-all hover:bg-sand hover:text-foreground sm:flex"
             >
               View All Tools
@@ -258,7 +258,7 @@ export default function HomePage() {
                  We curate new tools manually every week so you don't have to sift through the noise.
                </p>
                <Link
-                 href="/categories"
+                 href="/category"
                  className="inline-flex items-center gap-2 rounded-xl bg-accent px-8 py-4 text-[15px] font-bold text-white shadow-lg shadow-accent/20 transition-all hover:shadow-xl hover:shadow-accent/40 hover:-translate-y-1 active:scale-95"
                >
                  Discover All Tools
