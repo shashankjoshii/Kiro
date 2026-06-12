@@ -94,8 +94,8 @@ export default function SearchBar() {
   return (
     <div ref={containerRef} className="relative w-full max-w-xl mx-auto" id="search">
       <div
-        className={`relative rounded-2xl border bg-card/80 backdrop-blur-md transition-all duration-300 ${
-          isFocused ? 'border-accent/40 shadow-[0_8px_30px_rgb(0,0,0,0.06)]' : 'border-border shadow-sm'
+        className={`relative rounded-xl border bg-card transition-all duration-200 ${
+          isFocused ? 'border-border-strong shadow-[0_2px_16px_rgba(0,0,0,0.05)]' : 'border-border'
         }`}
       >
         <div className="flex items-center gap-3 px-5 py-3.5">
@@ -148,7 +148,7 @@ export default function SearchBar() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 8, scale: 0.98 }}
             transition={{ duration: 0.2, ease: [0.21, 0.47, 0.32, 0.98] }}
-            className="absolute left-0 right-0 top-full z-50 mt-2 overflow-hidden rounded-2xl border border-border bg-card/90 backdrop-blur-xl shadow-[0_12px_40px_rgb(0,0,0,0.08)]"
+            className="absolute left-0 right-0 top-full z-50 mt-1.5 overflow-hidden rounded-xl border border-border bg-card shadow-[0_8px_32px_rgba(0,0,0,0.07)]"
           >
             {query.trim().length === 0 ? (
               <div className="py-2">

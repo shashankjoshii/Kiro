@@ -2,96 +2,93 @@
 
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { ExternalLink, ArrowRight, Star } from 'lucide-react';
+import { ExternalLink, ArrowRight } from 'lucide-react';
 import type { Tool } from '@/lib/data';
 import DynamicIcon from '@/components/DynamicIcon';
 
 interface ToolCardProps {
   tool: Tool;
   index?: number;
-  /** Show a "Sponsored" badge — monetization hook for future affiliate deals */
   sponsored?: boolean;
 }
 
 export default function ToolCard({ tool, index = 0, sponsored = false }: ToolCardProps) {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 16 }}
+      initial={{ opacity: 0, y: 14 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.4, delay: index * 0.05, ease: [0.21, 0.47, 0.32, 0.98] }}
+      transition={{ duration: 0.38, delay: index * 0.045, ease: [0.21, 0.47, 0.32, 0.98] }}
       className="group h-full"
     >
-      <div className="relative flex h-full flex-col rounded-2xl border border-border bg-card/60 backdrop-blur-md p-6 transition-all duration-300 hover:border-accent/30 hover:bg-card hover:shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:-translate-y-1 overflow-hidden">
+      <div className="relative flex h-full flex-col rounded-xl border border-border bg-card p-5 transition-all duration-200 hover:border-border-strong hover:shadow-[0_2px_16px_rgba(0,0,0,0.05)] hover:-translate-y-0.5 overflow-hidden">
 
-        {/* Priority badge (Trending OR Sponsored — Sponsored takes precedence) */}
+        {/* Priority badge */}
         {sponsored ? (
-          <div className="absolute right-0 top-0 rounded-bl-xl bg-amber-50 border-b border-l border-amber-200 px-3 py-1 text-[11px] font-bold tracking-wide text-amber-700 shadow-sm z-10">
-            ⭐ Sponsored
+          <div className="absolute right-0 top-0 rounded-bl-lg border-b border-l border-border bg-sand px-2.5 py-1 text-[10px] font-semibold tracking-widest text-muted uppercase z-10">
+            Sponsored
           </div>
         ) : tool.trendingLabel ? (
-          <div className="absolute right-0 top-0 rounded-bl-xl bg-accent-bg/80 border-b border-l border-accent/20 px-3 py-1 text-[11px] font-bold tracking-wide text-accent-dark shadow-sm backdrop-blur-sm z-10">
-            {tool.trendingLabel}
+          <div className="absolute right-0 top-0 rounded-bl-lg border-b border-l border-border bg-sand px-2.5 py-1 text-[10px] font-semibold tracking-widest text-muted uppercase z-10">
+            {tool.trendingLabel.replace('🔥 ', '').replace('✨ ', '')}
           </div>
         ) : null}
 
         {/* Header */}
-        <div className="mb-4 flex items-start justify-between">
-          <div className="flex items-center gap-3.5">
-            <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-sand text-foreground shadow-sm transition-transform duration-300 group-hover:scale-105 group-hover:bg-accent-bg group-hover:shadow-md group-hover:text-accent-dark">
-              <DynamicIcon name={tool.icon} className="h-6 w-6 stroke-[1.5]" />
+        <div className="mb-4 flex items-start gap-3">
+          <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-sand text-foreground transition-colors duration-200 group-hover:bg-sand-dark">
+            <DynamicIcon name={tool.icon} className="h-5 w-5 stroke-[1.5]" />
+          </span>
+          <div className="min-w-0">
+            <h3 className="text-sm font-semibold text-foreground tracking-tight leading-snug">
+              {tool.name}
+            </h3>
+            <span className="text-[11px] text-muted capitalize">
+              {tool.category.replace(/-/g, ' ')}
             </span>
-            <div>
-              <h3 className="text-base font-semibold text-foreground tracking-tight transition-colors group-hover:text-accent-dark">
-                {tool.name}
-              </h3>
-              <span className="text-xs font-medium text-muted">
-                {tool.category.replace('-', ' & ').replace('dev', 'Dev')}
-              </span>
-            </div>
           </div>
           {tool.featured && !sponsored && (
-            <span className="rounded-full bg-accent-bg/80 px-2.5 py-1 text-[10px] font-bold uppercase tracking-widest text-accent shadow-sm backdrop-blur-sm">
+            <span className="ml-auto shrink-0 text-[10px] font-semibold uppercase tracking-widest text-accent">
               Featured
             </span>
           )}
         </div>
 
         {/* Description */}
-        <p className="mb-4 flex-1 text-[14px] leading-relaxed text-muted line-clamp-3">
+        <p className="mb-4 flex-1 text-[13px] leading-relaxed text-muted line-clamp-3">
           {tool.shortDescription}
         </p>
 
-        {/* Tags & Difficulty */}
-        <div className="mb-6 flex flex-wrap items-center gap-2">
+        {/* Tags */}
+        <div className="mb-4 flex flex-wrap gap-1.5">
           {tool.difficulty && (
-            <span className="rounded-md bg-sand px-2 py-1 text-[11px] font-medium text-muted-foreground border border-border/50">
+            <span className="rounded-md border border-border px-2 py-0.5 text-[11px] text-muted">
               {tool.difficulty}
             </span>
           )}
           {tool.tags?.slice(0, 2).map(tag => (
-            <span key={tag} className="rounded-md bg-accent-bg/50 text-accent-dark px-2 py-1 text-[11px] font-medium border border-accent/10">
-              {tag}
+            <span key={tag} className="rounded-md border border-border px-2 py-0.5 text-[11px] text-muted">
+              {tag.replace(/^[^\w\s]+\s?/, '')}
             </span>
           ))}
         </div>
 
         {/* Actions */}
-        <div className="flex items-center gap-2.5 pt-4 border-t border-border/50">
+        <div className="flex items-center gap-2 pt-4 border-t border-border">
           <Link
             href={`/tools/${tool.slug}`}
-            className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-sand/50 px-4 py-2.5 text-[13px] font-semibold text-foreground transition-all duration-200 hover:bg-sand hover:text-accent-dark active:scale-[0.98]"
+            className="flex flex-1 items-center justify-center gap-1.5 rounded-lg bg-foreground px-4 py-2.5 text-[12px] font-semibold text-background transition-opacity hover:opacity-85 active:scale-[0.98]"
           >
-            Learn More
-            <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-1" />
+            Learn more
+            <ArrowRight className="h-3 w-3" />
           </Link>
           <a
             href={tool.link}
             target="_blank"
             rel={sponsored ? 'sponsored noopener noreferrer' : 'noopener noreferrer'}
-            className="flex h-[42px] w-[42px] items-center justify-center rounded-xl bg-background border border-border text-muted transition-all duration-200 hover:border-accent/30 hover:bg-accent-bg hover:text-accent active:scale-[0.98]"
+            className="flex h-[38px] w-[38px] items-center justify-center rounded-lg border border-border text-muted transition-all duration-150 hover:border-border-strong hover:text-foreground active:scale-[0.97]"
             aria-label={`Visit ${tool.name}`}
           >
-            <ExternalLink className="h-4 w-4" />
+            <ExternalLink className="h-3.5 w-3.5" />
           </a>
         </div>
       </div>

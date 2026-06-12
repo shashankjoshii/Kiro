@@ -1,21 +1,33 @@
 import type { Metadata } from "next";
+import { Inter, Source_Serif_4 } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Mascot from "@/components/Mascot";
+import { MascotProvider } from "@/context/MascotContext";
 
-const inter = { variable: "--font-inter" };
-const sourceSerif = { variable: "--font-source-serif" };
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+  display: "swap",
+});
+
+const sourceSerif = Source_Serif_4({
+  subsets: ["latin"],
+  variable: "--font-source-serif",
+  weight: ["300", "400", "600"],
+  display: "swap",
+});
 
 const BASE_URL = process.env.NEXT_PUBLIC_APP_URL || "https://kiro-two-tau.vercel.app";
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: {
-    default: "Best AI Tools Directory (2026) – 200+ Free & Paid Tools | KIRO",
+    default: "Best AI Tools Directory (2026) – 370+ Free & Paid Tools | KIRO",
     template: "%s | KIRO",
   },
   description:
-    "Discover 200+ AI tools for developers, designers, and creators. Updated daily with trending and powerful AI tools.",
+    "Discover 370+ AI tools for developers, designers, and creators. Updated regularly with the best AI tools across 11 categories.",
   keywords: [
     "AI tools",
     "artificial intelligence tools",
@@ -41,9 +53,9 @@ export const metadata: Metadata = {
     icon: "/favicon.ico",
   },
   openGraph: {
-    title: "Best AI Tools Directory (2026) – 200+ Free & Paid Tools | KIRO",
+    title: "Best AI Tools Directory (2026) – 370+ Free & Paid Tools | KIRO",
     description:
-      "Discover 200+ AI tools for developers, designers, and creators. Updated daily with trending and powerful AI tools.",
+      "Discover 370+ AI tools for developers, designers, and creators. Updated regularly with the best AI tools across 11 categories.",
     url: BASE_URL,
     siteName: "KIRO",
     type: "website",
@@ -51,13 +63,11 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Best AI Tools Directory (2026) – 200+ Free & Paid Tools | KIRO",
+    title: "Best AI Tools Directory (2026) – 370+ Free & Paid Tools | KIRO",
     description:
-      "Discover 200+ AI tools for developers, designers, and creators. Updated daily with trending and powerful AI tools.",
+      "Discover 370+ AI tools for developers, designers, and creators. Updated regularly with the best AI tools across 11 categories.",
   },
 };
-
-import { MascotProvider } from "@/context/MascotContext";
 
 export default function RootLayout({
   children,
@@ -67,50 +77,94 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${sourceSerif.variable} h-full antialiased`}
+      className={`${inter.variable} ${sourceSerif.variable} h-full`}
     >
-      <body className="min-h-full flex flex-col bg-background text-foreground">
+      <body className="min-h-full flex flex-col bg-background text-foreground antialiased">
         <MascotProvider>
           <Navbar />
-          <main className="flex-1 pt-14">{children}</main>
+          <main className="flex-1 pt-16">{children}</main>
           <Mascot />
 
-        {/* Footer */}
-        <footer className="border-t border-border bg-card mt-24">
-          <div className="mx-auto max-w-6xl px-5 py-12 sm:px-8">
-            <div className="flex flex-col items-center justify-between gap-6 sm:flex-row">
-              <div className="flex items-center gap-3">
-                <div className="h-6 w-6">
-                  <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-                     <path d="M50 10 C30 10 15 25 15 45 C15 65 50 90 50 90 C50 90 85 65 85 45 C85 25 70 10 50 10 Z" fill="var(--color-accent)"/>
-                  </svg>
+          {/* Footer */}
+          <footer className="border-t border-border mt-24">
+            <div className="mx-auto max-w-6xl px-5 py-16 sm:px-8">
+              <div className="grid grid-cols-1 gap-10 sm:grid-cols-4">
+                {/* Brand */}
+                <div className="sm:col-span-2">
+                  <div className="flex items-center gap-2.5 mb-4">
+                    <svg viewBox="0 0 36 36" className="h-7 w-7" xmlns="http://www.w3.org/2000/svg">
+                      <polygon points="6,14 10,2 15,14" fill="var(--color-accent)" />
+                      <polygon points="8,13 10,5 13,13" fill="#fce8d5" />
+                      <polygon points="21,14 26,2 30,14" fill="var(--color-accent)" />
+                      <polygon points="23,13 26,5 28,13" fill="#fce8d5" />
+                      <polygon points="9,5 10,2 11,5" fill="#3d2b1f" />
+                      <polygon points="25,5 26,2 27,5" fill="#3d2b1f" />
+                      <ellipse cx="18" cy="21" rx="13" ry="12" fill="var(--color-accent)" />
+                      <ellipse cx="18" cy="24" rx="9" ry="8" fill="#fce8d5" />
+                      <circle cx="13" cy="19" r="2.5" fill="#1a1714" />
+                      <circle cx="23" cy="19" r="2.5" fill="#1a1714" />
+                      <circle cx="14" cy="18" r="0.8" fill="#fff" />
+                      <circle cx="24" cy="18" r="0.8" fill="#fff" />
+                      <ellipse cx="18" cy="23" rx="2" ry="1.5" fill="#3d2b1f" />
+                      <path d="M16,25 Q18,27 20,25" fill="none" stroke="#3d2b1f" strokeWidth="0.8" strokeLinecap="round" />
+                    </svg>
+                    <span
+                      className="text-lg font-semibold tracking-tight"
+                      style={{ fontFamily: "var(--font-source-serif), Georgia, serif" }}
+                    >
+                      KIRO
+                    </span>
+                  </div>
+                  <p className="text-sm text-muted leading-relaxed max-w-xs">
+                    370+ AI tools, curated and categorized. No noise — just the best tools for what you want to build.
+                  </p>
                 </div>
-                <span className="font-serif text-lg font-medium">KIRO</span>
+
+                {/* Directory */}
+                <div>
+                  <p className="text-eyebrow text-muted mb-4">Directory</p>
+                  <ul className="space-y-2.5">
+                    {[
+                      { label: "All Categories", href: "/category" },
+                      { label: "Trending Tools", href: "/" },
+                      { label: "AI Agents", href: "/category/ai-agents" },
+                      { label: "Education", href: "/category/education" },
+                    ].map(({ label, href }) => (
+                      <li key={label}>
+                        <a href={href} className="text-sm text-muted hover:text-foreground transition-colors">
+                          {label}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* Company */}
+                <div>
+                  <p className="text-eyebrow text-muted mb-4">Company</p>
+                  <ul className="space-y-2.5">
+                    {[
+                      { label: "About", href: "/about" },
+                      { label: "Submit a Tool", href: "#" },
+                      { label: "Privacy", href: "#" },
+                      { label: "Terms", href: "#" },
+                    ].map(({ label, href }) => (
+                      <li key={label}>
+                        <a href={href} className="text-sm text-muted hover:text-foreground transition-colors">
+                          {label}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
-              
-              <div className="flex items-center gap-8">
-                <a href="#" className="font-serif text-sm text-foreground hover:text-accent transition-colors">
-                  Research
-                </a>
-                <a href="#" className="font-serif text-sm text-foreground hover:text-accent transition-colors">
-                  Submit Tool
-                </a>
-                <a href="#" className="font-serif text-sm text-foreground hover:text-accent transition-colors">
-                  Company
-                </a>
+
+              <div className="mt-12 pt-8 border-t border-border flex flex-col sm:flex-row justify-between items-center gap-4">
+                <p className="text-xs text-muted">© 2026 KIRO. All rights reserved.</p>
+                <p className="text-xs text-muted">Made with care for the AI community.</p>
               </div>
             </div>
-            <div className="mt-8 pt-8 border-t border-border flex flex-col sm:flex-row justify-between gap-4">
-               <p className="text-xs text-muted">
-                 © 2026 KIRO. All rights reserved.
-               </p>
-                <div className="flex gap-4">
-                  <a href="#" className="text-xs text-muted hover:text-foreground">Privacy</a>
-                  <a href="#" className="text-xs text-muted hover:text-foreground">Terms</a>
-               </div>
-            </div>
-          </div>
-        </footer>
+          </footer>
         </MascotProvider>
       </body>
     </html>

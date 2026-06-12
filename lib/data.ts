@@ -8,6 +8,7 @@ export interface Tool {
   description: string;
   shortDescription: string;
   category: string;
+  secondaryCategories?: string[];
   link: string;
   pricing?: string;
   featured: boolean;
@@ -65,11 +66,12 @@ export const tools: Tool[] = rawTools.map((tool: any) => ({
   description: tool.description,
   shortDescription: tool.shortDescription,
   category: tool.category,
+  secondaryCategories: Array.isArray(tool.secondaryCategories) ? tool.secondaryCategories : undefined,
   link: tool.link,
   pricing: tool.pricing || undefined,
   featured: Boolean(tool.featured),
   features: Array.isArray(tool.features) ? tool.features : [],
-  icon: tool.icon || "HelpCircle", // Fallback injected at data layer if omitted
+  icon: tool.icon || "HelpCircle",
   tags: Array.isArray(tool.tags) ? tool.tags : [],
   difficulty: tool.difficulty || "Beginner",
   useCases: Array.isArray(tool.useCases) ? tool.useCases : [],
@@ -92,9 +94,9 @@ export type Persona = "students" | "developers" | "marketers";
  * failed because tool tags use emoji prefixes and don't match plain strings.
  */
 const personaCategoryMap: Record<Persona, string[]> = {
-  students: ["research", "productivity", "text-writing"],
-  developers: ["code-dev", "data-analytics", "productivity"],
-  marketers: ["text-writing", "design", "productivity", "video-audio"],
+  students: ["research", "productivity", "text-writing", "education"],
+  developers: ["code-dev", "data-analytics", "productivity", "ai-agents"],
+  marketers: ["text-writing", "design", "productivity", "video-audio", "business"],
 };
 
 export function getToolsByPersona(persona: Persona): Tool[] {
@@ -110,7 +112,11 @@ export function getToolBySlug(slug: string): Tool | undefined {
 }
 
 export function getToolsByCategory(categorySlug: string): Tool[] {
-  return tools.filter((tool) => tool.category === categorySlug);
+  return tools.filter(
+    (tool) =>
+      tool.category === categorySlug ||
+      (tool.secondaryCategories && tool.secondaryCategories.includes(categorySlug))
+  );
 }
 
 export function getFeaturedTools(): Tool[] {

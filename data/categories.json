@@ -6,5 +6,8 @@
   { "name": "Productivity", "slug": "productivity", "icon": "Zap", "color": "from-indigo-500 to-violet-400" },
   { "name": "Research", "slug": "research", "icon": "Search", "color": "from-rose-500 to-red-400" },
   { "name": "Design", "slug": "design", "icon": "Palette", "color": "from-teal-500 to-cyan-400" },
-  { "name": "Data & Analytics", "slug": "data-analytics", "icon": "BarChart", "color": "from-yellow-500 to-orange-400" }
+  { "name": "Data & Analytics", "slug": "data-analytics", "icon": "BarChart", "color": "from-yellow-500 to-orange-400" },
+  { "name": "AI Agents", "slug": "ai-agents", "icon": "Bot", "color": "from-violet-600 to-purple-500" },
+  { "name": "Education", "slug": "education", "icon": "GraduationCap", "color": "from-sky-500 to-blue-400" },
+  { "name": "Business & Sales", "slug": "business", "icon": "Briefcase", "color": "from-emerald-600 to-teal-400" }
 ]
