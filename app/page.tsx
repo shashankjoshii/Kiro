@@ -11,7 +11,7 @@ import KiroHero from '@/components/KiroHero';
 import { categories, getFeaturedTools, getToolsByCategory, intents, getTrendingTools } from '@/lib/data';
 
 const statItems = [
-  { value: '370+', label: 'Curated tools' },
+  { value: '500+', label: 'Curated tools' },
   { value: '11', label: 'Categories' },
   { value: 'Free', label: 'Always' },
   { value: 'Weekly', label: 'Updates' },
@@ -55,7 +55,7 @@ export default function HomePage() {
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-60" />
                     <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-accent" />
                   </span>
-                  370+ AI tools, curated for you
+                  500+ AI tools, curated for you
                 </span>
               </motion.div>
 
@@ -367,13 +367,13 @@ export default function HomePage() {
               Can't find what you're<br />looking for?
             </h2>
             <p className="mb-10 text-[15px] text-background/60 max-w-md mx-auto leading-relaxed">
-              We curate new tools every week. 370+ tools and growing — no fluff, no noise.
+              We curate new tools every week. 500+ tools and growing — no fluff, no noise.
             </p>
             <Link
               href="/category"
               className="inline-flex items-center gap-2 rounded-lg bg-background text-foreground px-8 py-3.5 text-[14px] font-semibold transition-opacity hover:opacity-90 active:scale-[0.98]"
             >
-              Browse all 370+ tools
+              Browse all 500+ tools
               <ArrowRight className="h-4 w-4" />
             </Link>
           </motion.div>

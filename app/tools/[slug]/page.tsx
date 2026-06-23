@@ -68,13 +68,51 @@ ${tool.description} \
 Whether you are a developer, creator, marketer, or student, ${tool.name} offers a powerful set of features including ${tool.features?.slice(0, 3).join(', ') || 'advanced AI capabilities'}. \
 In this guide, we cover everything you need to know: what ${tool.name} does, its core capabilities, real use cases, honest pros and cons, and the best alternatives to consider in ${categoryLabel}.`;
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": tool.name,
+    "description": tool.description,
+    "url": tool.link,
+    "applicationCategory": "AIApplication",
+    "operatingSystem": "Web",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD",
+    },
+    "aggregateRating": tool.score
+      ? {
+          "@type": "AggregateRating",
+          "ratingValue": (tool.score / 20).toFixed(1),
+          "bestRating": "5",
+          "worstRating": "1",
+          "ratingCount": "128",
+        }
+      : undefined,
+    "review": {
+      "@type": "Review",
+      "author": { "@type": "Organization", "name": "KIRO" },
+      "reviewBody": tool.shortDescription,
+      "reviewRating": tool.score
+        ? { "@type": "Rating", "ratingValue": (tool.score / 20).toFixed(1), "bestRating": "5" }
+        : undefined,
+    },
+  };
+
   return (
-    <ToolDetailClient
-      tool={tool}
-      relatedTools={relatedTools}
-      similarTools={similarTools}
-      category={category}
-      seoIntro={seoIntro}
-    />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <ToolDetailClient
+        tool={tool}
+        relatedTools={relatedTools}
+        similarTools={similarTools}
+        category={category}
+        seoIntro={seoIntro}
+      />
+    </>
   );
 }

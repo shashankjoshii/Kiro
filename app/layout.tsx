@@ -23,11 +23,11 @@ const BASE_URL = process.env.NEXT_PUBLIC_APP_URL || "https://kiro-two-tau.vercel
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: {
-    default: "Best AI Tools Directory (2026) – 370+ Free & Paid Tools | KIRO",
+    default: "Best AI Tools Directory (2026) – 500+ Free & Paid Tools | KIRO",
     template: "%s | KIRO",
   },
   description:
-    "Discover 370+ AI tools for developers, designers, and creators. Updated regularly with the best AI tools across 11 categories.",
+    "Discover 500+ AI tools for developers, designers, and creators. Updated regularly with the best AI tools across 11 categories including text, image, code, video, and more.",
   keywords: [
     "AI tools",
     "artificial intelligence tools",
@@ -35,6 +35,10 @@ export const metadata: Metadata = {
     "best AI tools 2026",
     "free AI tools",
     "ChatGPT alternatives",
+    "AI tools list",
+    "top AI tools",
+    "AI software",
+    "generative AI tools",
   ],
   authors: [{ name: "KIRO" }],
   creator: "KIRO",
@@ -53,9 +57,9 @@ export const metadata: Metadata = {
     icon: "/favicon.ico",
   },
   openGraph: {
-    title: "Best AI Tools Directory (2026) – 370+ Free & Paid Tools | KIRO",
+    title: "Best AI Tools Directory (2026) – 500+ Free & Paid Tools | KIRO",
     description:
-      "Discover 370+ AI tools for developers, designers, and creators. Updated regularly with the best AI tools across 11 categories.",
+      "Discover 500+ AI tools for developers, designers, and creators. Updated regularly with the best AI tools across 11 categories.",
     url: BASE_URL,
     siteName: "KIRO",
     type: "website",
@@ -63,9 +67,12 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Best AI Tools Directory (2026) – 370+ Free & Paid Tools | KIRO",
+    title: "Best AI Tools Directory (2026) – 500+ Free & Paid Tools | KIRO",
     description:
-      "Discover 370+ AI tools for developers, designers, and creators. Updated regularly with the best AI tools across 11 categories.",
+      "Discover 500+ AI tools for developers, designers, and creators. Updated regularly with the best AI tools across 11 categories.",
+  },
+  alternates: {
+    canonical: BASE_URL,
   },
 };
 
@@ -80,6 +87,46 @@ export default function RootLayout({
       className={`${inter.variable} ${sourceSerif.variable} h-full`}
     >
       <body className="min-h-full flex flex-col bg-background text-foreground antialiased">
+        {/* JSON-LD structured data */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@graph": [
+                {
+                  "@type": "WebSite",
+                  "@id": `${BASE_URL}/#website`,
+                  "url": BASE_URL,
+                  "name": "KIRO",
+                  "description": "The most comprehensive AI tools directory with 500+ curated tools across 11 categories.",
+                  "potentialAction": {
+                    "@type": "SearchAction",
+                    "target": { "@type": "EntryPoint", "urlTemplate": `${BASE_URL}/tools?q={search_term_string}` },
+                    "query-input": "required name=search_term_string",
+                  },
+                },
+                {
+                  "@type": "Organization",
+                  "@id": `${BASE_URL}/#organization`,
+                  "name": "KIRO",
+                  "url": BASE_URL,
+                  "logo": { "@type": "ImageObject", "url": `${BASE_URL}/favicon.ico` },
+                  "sameAs": [],
+                },
+                {
+                  "@type": "CollectionPage",
+                  "@id": `${BASE_URL}/#collection`,
+                  "url": BASE_URL,
+                  "name": "Best AI Tools Directory (2026) – 500+ Tools",
+                  "description": "Discover 500+ AI tools for developers, designers, and creators curated across 11 categories.",
+                  "isPartOf": { "@id": `${BASE_URL}/#website` },
+                  "publisher": { "@id": `${BASE_URL}/#organization` },
+                },
+              ],
+            }),
+          }}
+        />
         <MascotProvider>
           <Navbar />
           <main className="flex-1 pt-16">{children}</main>
@@ -116,7 +163,7 @@ export default function RootLayout({
                     </span>
                   </div>
                   <p className="text-sm text-muted leading-relaxed max-w-xs">
-                    370+ AI tools, curated and categorized. No noise — just the best tools for what you want to build.
+                    500+ AI tools, curated and categorized. No noise — just the best tools for what you want to build.
                   </p>
                 </div>
 
